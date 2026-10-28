@@ -97,7 +97,7 @@ export function Docs() {
           </section>
         ))}
         <section id="contracts">
-          <h2>Contract addresses</h2>
+          <h2>Contract address</h2>
           <p>Robinhood Chain Testnet, chain id 46630. Each address opens on the testnet explorer.</p>
           <div className="addr">
             {contracts.map((contract) => (

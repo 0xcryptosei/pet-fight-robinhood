@@ -5,7 +5,7 @@ const links = [
   { to: '/docs#terms', label: 'Terms of Service' },
   { to: '/docs#privacy', label: 'Privacy' },
   { to: '/docs#fair-play', label: 'Fair-play rules' },
-  { to: '/docs#contracts', label: 'Contract addresses' },
+  { to: '/docs#contracts', label: 'Contract address' },
 ]
 
 export function Footer() {

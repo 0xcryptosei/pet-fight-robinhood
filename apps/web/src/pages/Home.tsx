@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { AimIcon, GrowIcon, InfoIcon, LockIcon, ShieldIcon, WindIcon } from '../components/Icons'
+import { AimIcon, GrowIcon, InfoIcon, LockIcon, ShieldIcon } from '../components/Icons'
 
 const features = [
   {
@@ -60,21 +60,8 @@ export function Home() {
             Public testnet beta. Game coins have no cash value.
           </p>
         </div>
-        <div className="stage" aria-hidden="true">
-          <div className="sky" />
-          <div className="hill" />
-          <div className="ground" />
-          <svg className="arc" viewBox="0 0 460 200" preserveAspectRatio="none">
-            <path d="M20 190 Q230 -60 440 170" fill="none" stroke="#fff" strokeOpacity="0.75" strokeWidth="3" strokeDasharray="8 10" strokeLinecap="round" />
-          </svg>
-          <div className="wind">
-            <WindIcon />
-            Wind 3 →
-          </div>
-          <div className="pet dog" />
-          <div className="pet cat" />
-          <div className="pet bird" />
-          <div className="pet pig" />
+        <div className="stage">
+          <img src="/hero.jpg" alt="Pet Fight pets on a hill" />
         </div>
       </section>
       <section className="features" id="how" aria-label="Features">

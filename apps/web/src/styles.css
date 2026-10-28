@@ -41,43 +41,42 @@ a:hover { color: #b7ccff; }
 .brand img { height: 48px; width: auto; display: block; }
 
 .nav { display: flex; flex-wrap: wrap; gap: 4px 24px; flex: 1 1 280px; }
-.nav a { color: #c9d4f2; font-weight: 500; font-size: 15px; padding: 10px 0; }
+.nav a { color: #c9d4f2; font-family: "Baloo 2", Inter, sans-serif; font-weight: 600; font-size: 18px; padding: 10px 0; }
 .nav a:hover { color: #fff; }
 
 .bar-end { display: flex; align-items: center; gap: 12px; margin-left: auto; }
-
-.testnet {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: #2a2410;
-  color: #ffd66b;
-  border: 1px solid #5c4a12;
-  font-size: 13px;
-  font-weight: 600;
-}
-.testnet i { width: 8px; height: 8px; border-radius: 50%; background: #ffc53d; }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   min-height: 48px;
   padding: 0 22px;
   border: 0;
   border-radius: 12px;
   background: #2f6bff;
   color: #fff;
-  font: inherit;
-  font-weight: 600;
-  font-size: 15px;
+  font-family: "Baloo 2", Inter, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
   cursor: pointer;
   text-decoration: none;
 }
 .btn:hover { background: #2459db; color: #fff; }
-.btn.lg { min-height: 52px; padding: 0 28px; font-size: 16px; }
+.btn img { height: 32px; width: auto; display: block; }
+.btn.wallet {
+  padding: 0 14px 0 20px;
+  border-radius: 18px;
+  background: #2f6bff;
+  font-family: "Baloo 2", Inter, sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.2px;
+}
+.btn.wallet:hover { background: #2459db; color: #fff; }
+.btn.wallet img { height: 36px; }
+.btn.lg { min-height: 52px; padding: 0 28px; font-size: 18px; }
 .btn.ghost { background: transparent; color: #eaf0ff; border: 1px solid #33467f; }
 .btn.ghost:hover { background: #16224a; color: #eaf0ff; }
 
@@ -112,7 +111,7 @@ a:hover { color: #b7ccff; }
   color: #fff;
 }
 .copy h1 span { color: #ffc53d; }
-.copy > p { margin: 0; max-width: 520px; font-size: 18px; line-height: 1.6; color: #b9c6e8; }
+.copy > p { margin: 0; max-width: 520px; font-family: "Baloo 2", Inter, sans-serif; font-weight: 500; font-size: 18px; line-height: 1.45; color: #b9c6e8; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .note { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #a3b1d6; }
 
@@ -172,8 +171,8 @@ a:hover { color: #b7ccff; }
 .ico.purple { background: #231a45; }
 .ico.blue { background: #10283f; }
 .ico.green { background: #0f2e26; }
-.features h2 { margin: 0 0 4px; font-size: 16px; font-weight: 700; color: #fff; }
-.features p { margin: 0; font-size: 14px; line-height: 1.5; color: #a3b1d6; }
+.features h2 { margin: 0 0 4px; font-family: "Baloo 2", Inter, sans-serif; font-size: 18px; font-weight: 700; color: #fff; }
+.features p { margin: 0; font-family: "Baloo 2", Inter, sans-serif; font-weight: 500; font-size: 15px; line-height: 1.4; color: #a3b1d6; }
 
 footer {
   margin-top: auto;
@@ -184,7 +183,9 @@ footer {
   min-height: 56px;
   padding: 0;
   gap: 8px 24px;
-  font-size: 13px;
+  font-family: "Baloo 2", Inter, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
   color: #a3b1d6;
 }
 .social { display: flex; align-items: center; gap: 8px; margin-left: auto; }

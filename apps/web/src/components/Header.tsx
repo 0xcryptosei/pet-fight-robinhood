@@ -23,12 +23,9 @@ export function Header() {
           ))}
         </nav>
         <div className="bar-end">
-          <span className="testnet">
-            <i />
-            Robinhood Chain Testnet
-          </span>
-          <button className="btn" type="button">
-            Connect wallet
+          <button className="btn wallet" type="button">
+            Connect
+            <img src="/wallet.png" alt="" />
           </button>
         </div>
       </div>

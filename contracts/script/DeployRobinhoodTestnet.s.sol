@@ -27,7 +27,8 @@ contract DeployRobinhoodTestnet is Script {
         if (msg.sender != DEPLOYER) revert UnexpectedDeployer(msg.sender);
 
         PetCoin coin = new PetCoin(1_000_000 ether, DEPLOYER);
-        PetNFT pets = new PetNFT(DEPLOYER);
+        PetNFT pets = new PetNFT(DEPLOYER, address(coin));
+        coin.grantRole(coin.MINTER_ROLE(), address(pets));
         BattleEscrow escrow = new BattleEscrow(
             coin,
             address(pets),

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AimIcon, GrowIcon, InfoIcon, LockIcon, ShieldIcon } from '../components/Icons'
 import { useWallet } from '../wallet'
 
@@ -32,15 +32,20 @@ const features = [
 
 export function Home() {
   const wallet = useWallet()
+  const navigate = useNavigate()
 
   useEffect(() => {
     document.title = 'Pet Fight'
   }, [])
 
-  function play() {
-    if (wallet.address || wallet.connecting) return
-    wallet.setOpen(true)
-    void wallet.connectMetaMask()
+  async function play() {
+    if (wallet.connecting) return
+    if (!wallet.address) {
+      wallet.setOpen(true)
+      const token = await wallet.connectMetaMask()
+      if (!token) return
+    }
+    navigate('/home')
   }
 
   return (

@@ -33,7 +33,8 @@ contract BattleEscrowTest is Test {
         stranger = makeAddr("stranger");
 
         coin = new PetCoin(1_000_000 ether, admin);
-        pets = new PetNFT(admin);
+        pets = new PetNFT(admin, address(coin));
+        coin.grantRole(coin.MINTER_ROLE(), address(pets));
         escrow = new BattleEscrow(coin, address(pets), signer, relayer, admin, 10 minutes, 2 minutes, 30 minutes, 0);
 
         pets.setAllowlist(host, true);
@@ -49,6 +50,21 @@ contract BattleEscrowTest is Test {
         coin.approve(address(escrow), START);
         vm.prank(guest);
         coin.approve(address(escrow), START);
+    }
+
+    function test_publicMintIsOneDog() public {
+        address player = address(0xB0B);
+        vm.prank(player);
+        uint256 id = pets.mintDog();
+        assertEq(pets.ownerOf(id), player);
+        (uint8 speciesId, uint16 level,,) = pets.pets(id);
+        assertEq(speciesId, pets.SPECIES_DOG());
+        assertEq(level, 1);
+        assertEq(coin.balanceOf(player), 100 ether);
+        assertTrue(bytes(pets.tokenURI(id)).length > 0);
+        vm.prank(player);
+        vm.expectRevert(PetNFT.AlreadyClaimed.selector);
+        pets.mintDog();
     }
 
     function test_starterClaimIsOneDogAndKeepsItsId() public {

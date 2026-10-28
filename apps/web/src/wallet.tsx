@@ -21,7 +21,7 @@ type WalletContextValue = {
   connecting: boolean
   error: string | null
   hasWallet: boolean
-  connectMetaMask: () => Promise<void>
+  connectMetaMask: () => Promise<string | null>
   disconnect: () => void
   clearError: () => void
 }
@@ -173,12 +173,12 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         setError(null)
       },
       async connectMetaMask() {
-        if (connectingRef.current) return
+        if (connectingRef.current) return null
         const ethereum = getEthereum()
         if (!ethereum) {
           setOpen(true)
           setError('MetaMask is not installed in this browser.')
-          return
+          return null
         }
         connectingRef.current = true
         setConnecting(true)
@@ -194,10 +194,12 @@ export function WalletProvider({ children }: { children: ReactNode }) {
           setToken(session.token)
           setAddress(session.address)
           setOpen(false)
+          return session.token
         } catch (caught) {
           if (errorCode(caught) === 4001) setError('The wallet request was cancelled.')
           else if (caught instanceof Error && caught.message) setError(caught.message)
           else setError('Could not connect the wallet.')
+          return null
         } finally {
           connectingRef.current = false
           setConnecting(false)

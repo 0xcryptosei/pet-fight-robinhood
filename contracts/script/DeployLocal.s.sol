@@ -22,7 +22,8 @@ contract DeployLocal is Script {
 
         vm.startBroadcast();
         PetCoin coin = new PetCoin(cap, admin);
-        PetNFT pets = new PetNFT(admin);
+        PetNFT pets = new PetNFT(admin, address(coin));
+        coin.grantRole(coin.MINTER_ROLE(), address(pets));
         BattleEscrow escrow = new BattleEscrow(
             coin, address(pets), signer, relayer, admin, 10 minutes, 2 minutes, 30 minutes, 1 hours
         );

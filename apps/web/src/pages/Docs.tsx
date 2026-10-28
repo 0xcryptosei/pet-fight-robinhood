@@ -15,7 +15,7 @@ const sections = [
     title: 'How it works',
     items: [
       'Connect a wallet on Robinhood Chain Testnet (chain id 46630). Test ETH is not mainnet ETH.',
-      'Pets are NFTs. The catalogue is dog, cat, pig, and bird. A match is dog versus cat.',
+      'A wallet starts with no pet. Create a pet to battle. That mints one dog NFT and the contract sends 100 PETC to the wallet. Every dog starts at HP 100, Power 70, and INT 50. Only the owner can upgrade that dog, and each level adds 10% of those base stats.',
       'A match is best of three. Each turn you choose an action, then set angle and power. Wind moves the shot.',
       'Both players lock the same PETC entry. Tiers are 10, 20, 50, 100, and 1,000. The room fee is 0, so the winner receives the full pot. A draw returns both entries.',
       'The shop sells PETC from a pre-funded inventory at 10,000 PETC per 1 test ETH. There is no sell-back.',
@@ -57,11 +57,11 @@ const sections = [
 ]
 
 const contracts = [
-  { name: 'PetCoin (PETC)', address: '0x6Ea1E56d978C726c864041Aeeb01BEE65F61b703' },
-  { name: 'PetNFT', address: '0x130B1da3DA46BdF060348c46d7156D0d88A30cac' },
-  { name: 'BattleEscrow', address: '0x4A9A8A24f14Df5baF7454Bed33199E528C05CF0c' },
-  { name: 'PetShop', address: '0x577C2B54Fd945662eb0EF46e3c2d59f2aA246FF5' },
-  { name: 'StakingVault', address: '0x9D012FA128a579569da24f04812A9d0425Ff57c0' },
+  { name: 'PetCoin (PETC)', address: '0xD33BbB7C15DFc7334c3D2CefA3acbb51fa24c6f2' },
+  { name: 'PetNFT', address: '0x2995Ab130Ff920D964E57e260a2Ffce1A1B8966F' },
+  { name: 'BattleEscrow', address: '0xE40D2d80E11ef4dD2F9E6Cfa02700967b0972958' },
+  { name: 'PetShop', address: '0xb86fC3115967F7eBb14094F1B3199A018e9ca55A' },
+  { name: 'StakingVault', address: '0xdbd03fD028Caa0E632Ffa367a05d3Fc7829BeC09' },
   { name: '$PET', address: '0x1E9d9FCe560d8A691d6Bce813460891215300b2b' },
 ]
 

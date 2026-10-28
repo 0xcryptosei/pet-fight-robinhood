@@ -20,7 +20,8 @@ contract EscrowHandler is Test {
     constructor() {
         address signer = vm.addr(SIGNER_KEY);
         coin = new PetCoin(1_000_000 ether, address(this));
-        pets = new PetNFT(address(this));
+        pets = new PetNFT(address(this), address(coin));
+        coin.grantRole(coin.MINTER_ROLE(), address(pets));
         escrow = new BattleEscrow(coin, address(pets), signer, address(this), address(this), 10 minutes, 2 minutes, 30 minutes, 0);
         for (uint256 i = 0; i < 3; ++i) {
             address actor = vm.addr(uint256(keccak256(abi.encode("actor", i))));

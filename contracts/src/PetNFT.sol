@@ -5,12 +5,20 @@ import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {ERC721Enumerable} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
+import {Base64} from "@openzeppelin/contracts/utils/Base64.sol";
+import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
+
+interface IPetcMint {
+    function mint(address to, uint256 amount) external;
+}
 
 /// @notice Pet ownership and compact progression.
 ///         On-chain fields are species, level, XP checkpoint, and metadata version.
 ///         Health, power, and intelligence in the species catalogue are a rules-version mirror,
 ///         not a second combat authority. Version 1 grants no XP.
-///         One starter dog per allow-listed wallet. The token id does not change when progression updates.
+///         One dog per wallet. `mintDog` is open to any wallet and mints 100 PETC to that wallet.
+///         `claimStarter` stays allow-listed and does not mint PETC.
+///         The token id does not change when progression updates. The image is the dog portrait URI.
 ///         Equipment entries store zero stat bonuses.
 contract PetNFT is ERC721Enumerable, AccessControl, Pausable {
     bytes32 public constant ALLOWLIST_ROLE = keccak256("ALLOWLIST_ROLE");
@@ -44,8 +52,12 @@ contract PetNFT is ERC721Enumerable, AccessControl, Pausable {
         string name;
     }
 
+    uint256 public constant STARTER_PETC = 100 ether;
+
     uint256 public nextTokenId = 1;
     uint256 public equipmentCount;
+    string public dogImage;
+    IPetcMint public immutable petc;
 
     mapping(uint8 => Species) public species;
     mapping(uint256 => Pet) public pets;
@@ -60,6 +72,7 @@ contract PetNFT is ERC721Enumerable, AccessControl, Pausable {
     event ProgressionUpdated(uint256 indexed tokenId, uint16 level, uint64 xpCheckpoint, uint32 metadataVersion);
     event EquipmentRegistered(uint256 indexed equipmentId, string name, uint16 headDefenseMilli, uint16 bodyDefenseMilli);
     event Equipped(uint256 indexed tokenId, uint256 indexed equipmentId);
+    event StarterPetcGranted(address indexed owner, uint256 indexed tokenId, uint256 amount);
 
     error ZeroAddress();
     error NotAllowlisted();
@@ -71,8 +84,9 @@ contract PetNFT is ERC721Enumerable, AccessControl, Pausable {
     error NotOwner();
     error NotCatalogueSpecies();
 
-    constructor(address admin) ERC721("Pet Fight Pet", "PET") {
-        if (admin == address(0)) revert ZeroAddress();
+    constructor(address admin, address petcToken) ERC721("Pet Fight Pet", "PET") {
+        if (admin == address(0) || petcToken == address(0)) revert ZeroAddress();
+        petc = IPetcMint(petcToken);
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(ALLOWLIST_ROLE, admin);
         _grantRole(PROGRESSION_ROLE, admin);
@@ -125,15 +139,43 @@ contract PetNFT is ERC721Enumerable, AccessControl, Pausable {
         }
     }
 
+    /// @notice Mint the one dog for this wallet and mint 100 PETC to it. No allow-list and no price.
+    ///         A second mint reverts. This contract must hold PETC `MINTER_ROLE`.
+    function mintDog() external whenNotPaused returns (uint256 tokenId) {
+        tokenId = _mintDog(msg.sender);
+        petc.mint(msg.sender, STARTER_PETC);
+        emit StarterPetcGranted(msg.sender, tokenId, STARTER_PETC);
+    }
+
     /// @notice Mint the one starter dog for an allow-listed wallet. The id is stable for the life of the pet.
     function claimStarter() external whenNotPaused returns (uint256 tokenId) {
         if (!allowlist[msg.sender]) revert NotAllowlisted();
-        if (claimedStarter[msg.sender]) revert AlreadyClaimed();
+        tokenId = _mintDog(msg.sender);
+    }
+
+    function setDogImage(string calldata image) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        dogImage = image;
+    }
+
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        if (pets[tokenId].speciesId == 0) revert UnknownPet();
+        string memory json = string.concat(
+            '{"name":"Pet Fight Dog #',
+            Strings.toString(tokenId),
+            '","description":"A Pet Fight dog. Level 1 is HP 100, Power 70, INT 50.","image":"',
+            dogImage,
+            '"}'
+        );
+        return string.concat("data:application/json;base64,", Base64.encode(bytes(json)));
+    }
+
+    function _mintDog(address to) internal returns (uint256 tokenId) {
+        if (claimedStarter[to]) revert AlreadyClaimed();
         tokenId = nextTokenId++;
-        claimedStarter[msg.sender] = true;
+        claimedStarter[to] = true;
         pets[tokenId] = Pet({speciesId: SPECIES_DOG, level: 1, xpCheckpoint: 0, metadataVersion: 1});
-        _safeMint(msg.sender, tokenId);
-        emit StarterClaimed(msg.sender, tokenId, SPECIES_DOG);
+        _safeMint(to, tokenId);
+        emit StarterClaimed(to, tokenId, SPECIES_DOG);
     }
 
     /// @notice Mint a cat, pig, or bird. The free starter remains the dog claim.

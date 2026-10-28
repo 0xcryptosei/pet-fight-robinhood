@@ -31,7 +31,7 @@ Reviewed with the code in this repo on 2026-10-27. This is the project's own rev
 - `BattleEscrow` still has no admin winner, no escrow withdrawal, and fee 0 on new rooms. The testnet deploy script sets admin, result signer, and relayer to the same deployer. Those roles have to be split, and the signer has to live in a KMS, before any real-value launch.
 - `PetShop` sells a pre-funded PETC inventory. It has no sell-back. The admin can withdraw sale ETH and unsold PETC. Buyers who already paid keep the PETC they received.
 - `StakingVault` pays PETC only from a funded pool. It does not mint. Unstake returns `$PET` after the 7-day lock. A short pool reverts the claim and leaves the stake in place. Adding to a stake refreshes the lock on the whole position.
-- Testnet `$PET` is `0x1E9d9FCe560d8A691d6Bce813460891215300b2b` on chain 46630. The game server reads `BattleEscrow` at `0x4A9A8A24f14Df5baF7454Bed33199E528C05CF0c`. A chain session starts only after both deposits are in a READY room. That session does not move test credits and does not submit the on-chain payout. Local credit rooms still exist.
+- Testnet `$PET` is `0x1E9d9FCe560d8A691d6Bce813460891215300b2b` on chain 46630. The game server reads `BattleEscrow` at `0xE40D2d80E11ef4dD2F9E6Cfa02700967b0972958`. A chain session starts only after both deposits are in a READY room. That session does not move test credits and does not submit the on-chain payout. Local credit rooms still exist.
 - The local login checks a wallet signature. The server does not take a private key.
 
 ## Player notice

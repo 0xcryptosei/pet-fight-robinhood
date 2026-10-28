@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AimIcon, GrowIcon, InfoIcon, LockIcon, ShieldIcon } from '../components/Icons'
+import { useWallet } from '../wallet'
 
 const features = [
   {
@@ -30,9 +31,17 @@ const features = [
 ]
 
 export function Home() {
+  const wallet = useWallet()
+
   useEffect(() => {
     document.title = 'Pet Fight'
   }, [])
+
+  function play() {
+    if (wallet.address || wallet.connecting) return
+    wallet.setOpen(true)
+    void wallet.connectMetaMask()
+  }
 
   return (
     <>
@@ -48,7 +57,7 @@ export function Home() {
             Collect pet NFTs, level them up with items, and outplay rivals in best-of-three artillery battles on Robinhood Chain. Aim, power and wind decide who wins.
           </p>
           <div className="actions">
-            <button className="btn lg" type="button">
+            <button className="btn lg" type="button" onClick={play}>
               Game play
             </button>
             <Link className="btn ghost lg" to="/docs#how">

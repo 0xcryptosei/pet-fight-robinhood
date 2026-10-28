@@ -19,12 +19,22 @@ export type OwnedPet = {
 
 export type DogStats = { hp: number; pwr: number; int: number }
 
-/** Level 1 is the shared base. Each level above that adds 10% of the base, rounded down. */
-export function dogStats(level: number): DogStats {
+export type GearCounts = { hat: number; cloth: number; shoes: number; food: number }
+
+/** One upgrade is 1 Cloth and 3 Food, which add HP +10, and 1 Hat and 1 Shoes, which add Power +7. */
+export const CLOTH_HP = 4
+export const FOOD_HP = 2
+export const HAT_PWR = 4
+export const SHOES_PWR = 3
+export const UPGRADE_HP = CLOTH_HP + FOOD_HP * 3
+export const UPGRADE_PWR = HAT_PWR + SHOES_PWR
+
+/** HP and Power come from the item counts saved on the upgrade contract. INT still follows the level. */
+export function gearStats(gear: GearCounts, level: number): DogStats {
   const steps = Math.max(0, level - 1)
   return {
-    hp: DOG_BASE.hp + Math.floor((DOG_BASE.hp * steps) / 10),
-    pwr: DOG_BASE.pwr + Math.floor((DOG_BASE.pwr * steps) / 10),
+    hp: DOG_BASE.hp + gear.cloth * CLOTH_HP + gear.food * FOOD_HP,
+    pwr: DOG_BASE.pwr + gear.hat * HAT_PWR + gear.shoes * SHOES_PWR,
     int: DOG_BASE.int + Math.floor((DOG_BASE.int * steps) / 10),
   }
 }

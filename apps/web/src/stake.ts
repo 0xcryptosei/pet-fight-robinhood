@@ -4,6 +4,21 @@ const CHAIN_ID = '0xb626'
 export const PET = '0x1E9d9FCe560d8A691d6Bce813460891215300b2b'
 export const PETC = '0xD33BbB7C15DFc7334c3D2CefA3acbb51fa24c6f2'
 export const VAULT = '0xdbd03fD028Caa0E632Ffa367a05d3Fc7829BeC09'
+export const UPGRADE = '0x9BfC849aba6be0459607d32eB025daf157c51672'
+export const ITEM_PETC = 100n
+export const UPGRADE_PETC = 600n
+
+const BUY_UPGRADE = '0xa5a2cb19'
+const BUY_ITEM = '0x780ac846'
+const GEAR = '0xbea80cea'
+
+export type Gear = {
+  hat: number
+  cloth: number
+  shoes: number
+  food: number
+  level: number
+}
 
 const BALANCE_OF = '0x70a08231'
 const ALLOWANCE = '0xdd62ed3e'
@@ -164,4 +179,45 @@ export async function withdrawPet(account: string, amount: bigint): Promise<void
 
 export async function withdrawPetc(account: string): Promise<void> {
   await send(account, VAULT, CLAIM)
+}
+
+const EMPTY_GEAR: Gear = { hat: 0, cloth: 0, shoes: 0, food: 0, level: 0 }
+
+function tokenWord(tokenId: string): string {
+  return pad(BigInt(tokenId).toString(16))
+}
+
+async function allowPetc(account: string, cost: bigint): Promise<void> {
+  const allowance = word(await call(PETC, ALLOWANCE + pad(account) + pad(UPGRADE)), 0)
+  if (allowance < cost) {
+    await send(account, PETC, APPROVE + pad(UPGRADE) + pad(cost.toString(16)))
+  }
+}
+
+export async function readGear(tokenId: string): Promise<Gear> {
+  if (!UPGRADE) return EMPTY_GEAR
+  const data = await call(UPGRADE, GEAR + tokenWord(tokenId))
+  return {
+    hat: Number(word(data, 0)),
+    cloth: Number(word(data, 1)),
+    shoes: Number(word(data, 2)),
+    food: Number(word(data, 3)),
+    level: Number(word(data, 4)),
+  }
+}
+
+export async function buyItem(account: string, tokenId: string, kind: number): Promise<void> {
+  if (!UPGRADE) {
+    throw new Error('Buying an item sends 100 PETC to the contract and saves that item on the dog. That contract is not on testnet yet.')
+  }
+  await allowPetc(account, ITEM_PETC * 10n ** 18n)
+  await send(account, UPGRADE, BUY_ITEM + tokenWord(tokenId) + pad(kind.toString(16)))
+}
+
+export async function buyUpgrade(account: string, tokenId: string): Promise<void> {
+  if (!UPGRADE) {
+    throw new Error('Upgrade sends 600 PETC to the contract and saves Hat, Cloth, Shoes, Food, and the new level on the dog. That contract is not on testnet yet.')
+  }
+  await allowPetc(account, UPGRADE_PETC * 10n ** 18n)
+  await send(account, UPGRADE, BUY_UPGRADE + tokenWord(tokenId))
 }

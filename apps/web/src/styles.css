@@ -689,74 +689,129 @@ footer {
 .battle-row button { border: 0; background: #2f6bff; color: #fff; padding: 0 16px; }
 .battle-foot { margin: 0; color: #a3b1d6; font-size: 13px; }
 
-.pet-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 .pet-head h1 { margin: 0; font-family: "Baloo 2", Inter, sans-serif; font-weight: 800; font-size: 32px; color: #fff; }
-.pet-head p { margin: 6px 0 0; color: #a3b1d6; font-size: 14px; }
-.pet-tabs { display: flex; gap: 4px; padding: 4px; border-radius: 14px; background: #121c3e; border: 1px solid #24345f; }
-.pet-tabs button {
-  min-height: 36px;
-  padding: 0 14px;
-  border: 0;
-  border-radius: 10px;
-  background: transparent;
-  color: #c9d4f2;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-}
-.pet-tabs button.is-on { background: #2f6bff; color: #fff; }
-.pet-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.pet-card, .pet-new {
-  padding: 14px;
-  border-radius: 16px;
+.pet-head p { margin: 8px 0 0; max-width: 560px; color: #a3b1d6; font-size: 15px; line-height: 1.5; }
+.pet-grid { display: grid; grid-template-columns: minmax(0, 880px); gap: 16px; }
+.pet-card {
+  padding: 22px;
+  border-radius: 20px;
   border: 1px solid #24345f;
   background: #121c3e;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 22px;
 }
-.pet-card header { display: flex; align-items: center; gap: 10px; }
-.pet-card img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; }
-.pet-card strong, .pet-new strong { display: block; color: #fff; font-size: 16px; }
-.pet-card header span, .pet-card header em { display: block; color: #a3b1d6; font-style: normal; font-size: 12px; }
-.pet-card dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 0; }
-.pet-card dl div { padding: 8px 4px; border-radius: 10px; background: #0a1230; text-align: center; }
-.pet-card dt { color: #8ea0c8; font-size: 11px; font-weight: 700; }
-.pet-card dd { margin: 2px 0 0; color: #fff; font-size: 18px; font-weight: 800; }
-.pet-card > p, .pet-new p { margin: 0; color: #a3b1d6; font-size: 13px; line-height: 1.4; }
-.pet-card footer { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto; }
-.pet-card footer button, .pet-new button {
-  min-height: 40px;
-  border-radius: 12px;
-  border: 1px solid #33467f;
-  background: transparent;
-  color: #eaf0ff;
+.pet-profile {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+}
+.pet-profile > img, .pet-empty > img {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #33467f;
+  background: #0a1230;
+}
+.pet-kicker { margin: 0; color: #8ea0c8; font-size: 12px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; }
+.pet-profile h2, .pet-empty h2 { margin: 4px 0 0; font-family: "Baloo 2", Inter, sans-serif; font-size: 32px; font-weight: 800; color: #fff; line-height: 1; }
+.pet-level { margin: 8px 0 0; color: #d5def5; font-size: 14px; font-weight: 700; }
+.pet-level span { margin-left: 10px; color: #7aa2ff; }
+.pet-statline { display: flex; gap: 10px; }
+.pet-statline article {
+  min-width: 156px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #24345f;
+  background: #0a1230;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pet-statline img { width: 28px; height: 28px; }
+.pet-statline span { display: block; color: #8ea0c8; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; }
+.pet-statline strong { display: block; margin-top: 2px; color: #fff; font-family: "Baloo 2", Inter, sans-serif; font-size: 28px; line-height: 1; font-weight: 800; }
+.pet-statline em { display: block; margin-top: 4px; color: #3ddc97; font-style: normal; font-size: 12px; font-weight: 700; }
+.pet-section { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.pet-section h3, .pet-upgrade h3 { margin: 0; color: #fff; font-size: 16px; font-weight: 700; }
+.pet-section p, .pet-upgrade p, .pet-empty p { margin: 6px 0 0; color: #8ea0c8; font-size: 13px; line-height: 1.45; }
+.pet-items { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.pet-items button {
+  padding: 16px 10px 14px;
+  border-radius: 16px;
+  border: 1px solid #24345f;
+  background: #0a1230;
+  color: inherit;
   font: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+.pet-items button:hover { border-color: #3d5ccc; }
+.pet-items button:disabled { opacity: 0.6; cursor: default; }
+.pet-items img { width: 52px; height: 52px; display: block; margin: 0 auto 10px; }
+.pet-items strong { display: block; color: #fff; font-size: 15px; }
+.pet-items span { display: block; margin-top: 4px; color: #8ea0c8; font-size: 12px; }
+.pet-items span.is-owned { color: #3ddc97; font-weight: 700; }
+.pet-items em { display: block; margin-top: 10px; color: #3ddc97; font-style: normal; font-size: 13px; font-weight: 800; }
+.pet-items small { display: block; margin-top: 4px; color: #ffd66b; font-size: 12px; font-weight: 700; }
+.pet-upgrade {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 16px 16px 18px;
+  border-radius: 16px;
+  border: 1px solid #24345f;
+  background: #0a1230;
+}
+.pet-upgrade h3 {
+  margin-top: 4px;
+  font-family: "Baloo 2", Inter, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+}
+.pet-upgrade h3 span { margin: 0 8px; color: #7aa2ff; font-weight: 800; }
+.pet-gains { display: flex; gap: 14px; margin-top: 10px; }
+.pet-gains span { display: flex; align-items: center; gap: 6px; color: #3ddc97; font-size: 13px; font-weight: 800; }
+.pet-gains img { width: 16px; height: 16px; }
+.pet-bundle { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+.pet-bundle li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 8px;
+  border-radius: 10px;
+  border: 1px solid #24345f;
+  background: #121c3e;
+  color: #d5def5;
+  font-size: 12px;
+  font-weight: 700;
+}
+.pet-bundle img { width: 20px; height: 20px; }
+.pet-bundle b { color: #ffd66b; font-weight: 800; }
+.pet-upgrade button, .pet-empty button {
+  flex: 0 0 auto;
+  min-width: 220px;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 14px;
+  background: #2f6bff;
+  color: #fff;
+  font-family: "Baloo 2", Inter, sans-serif;
+  font-size: 18px;
   font-weight: 700;
   cursor: pointer;
 }
-.pet-card footer button.is-upgrade, .pet-new button { border: 0; background: #2f6bff; color: #fff; }
-.pet-new {
-  grid-column: 1;
-  align-items: center;
-  text-align: center;
-  border-style: dashed;
-  background: transparent;
-}
-.pet-new img, .create-pet-face { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; }
-.create-pet-face { align-self: center; }
-.pet-new i {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: #16224a;
-  color: #8fb0ff;
-  font-style: normal;
-  font-size: 24px;
-  font-weight: 700;
-}
+.pet-upgrade button:hover, .pet-empty button:hover { background: #2459db; }
+.pet-upgrade button:disabled, .pet-empty button:disabled { opacity: 0.6; cursor: default; }
+.pet-empty { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: center; }
+.pet-empty button { margin-top: 14px; }
+.create-pet-face { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; align-self: center; }
 
 .wait-card {
   width: min(520px, 100%);
@@ -793,6 +848,8 @@ footer {
 @media (max-width: 980px) {
   .copy h1 { font-size: 48px; }
   .features { grid-template-columns: 1fr 1fr; }
+  .pet-profile { grid-template-columns: auto minmax(0, 1fr); }
+  .pet-statline { grid-column: 1 / -1; }
 }
 @media (max-width: 640px) {
   .features { grid-template-columns: 1fr; }
@@ -803,8 +860,11 @@ footer {
   .lobby { grid-template-columns: 1fr; }
   .lobby-side { flex-direction: row; overflow: auto; border-right: 0; border-bottom: 1px solid #1e2c55; }
   .tier-row { grid-template-columns: 1fr 1fr; }
-  .stake-stats, .stake-grid, .pet-grid { grid-template-columns: 1fr; }
-  .pet-head { flex-direction: column; }
+  .stake-stats, .stake-grid, .pet-grid, .pet-profile, .pet-empty { grid-template-columns: 1fr; }
+  .pet-items { grid-template-columns: 1fr 1fr; }
+  .pet-statline, .pet-upgrade { flex-direction: column; align-items: stretch; }
+  .pet-upgrade button { align-self: stretch; }
+  .pet-upgrade button, .pet-empty button { width: 100%; }
   .lobby-banner { flex-direction: column; align-items: flex-start; }
   .room-head, .battle-labels { display: none; }
   .room-row, .battle-row { grid-template-columns: 1fr auto; }

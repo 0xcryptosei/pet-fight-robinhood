@@ -7,6 +7,7 @@ import { BattleRooms } from './pages/BattleRooms'
 import { Lobby } from './pages/Lobby'
 import { Pets } from './pages/Pets'
 import { Practice } from './pages/Practice'
+import { Shop } from './pages/Shop'
 import { WaitingRoom } from './pages/WaitingRoom'
 import { WalletProvider } from './wallet'
 
@@ -22,6 +23,7 @@ export function App() {
           <Route path="/home" element={<Lobby />} />
           <Route path="/pets" element={<Pets />} />
           <Route path="/practice" element={<Practice />} />
+          <Route path="/shop" element={<Shop />} />
           <Route path="/rooms" element={<BattleRooms />} />
           <Route path="/rooms/:roomId" element={<WaitingRoom />} />
         </Routes>

@@ -5,9 +5,12 @@ export const PET = '0x1E9d9FCe560d8A691d6Bce813460891215300b2b'
 export const PETC = '0xD33BbB7C15DFc7334c3D2CefA3acbb51fa24c6f2'
 export const VAULT = '0xdbd03fD028Caa0E632Ffa367a05d3Fc7829BeC09'
 export const UPGRADE = '0x9BfC849aba6be0459607d32eB025daf157c51672'
+export const SHOP = '0xb86fC3115967F7eBb14094F1B3199A018e9ca55A'
+export const PETC_PER_ETH = 10_000n
 export const ITEM_PETC = 100n
 export const UPGRADE_PETC = 600n
 
+const BUY_PETC = '0xa6f2ae3a'
 const BUY_UPGRADE = '0xa5a2cb19'
 const BUY_ITEM = '0x780ac846'
 const GEAR = '0xbea80cea'
@@ -80,6 +83,22 @@ export async function readPetcBalance(account: string): Promise<bigint> {
   return word(await call(PETC, BALANCE_OF + pad(account)), 0)
 }
 
+export async function readShopStock(): Promise<bigint> {
+  return word(await call(PETC, BALANCE_OF + pad(SHOP)), 0)
+}
+
+export function petcForEth(ethWei: bigint): bigint {
+  return ethWei * PETC_PER_ETH
+}
+
+export async function buyPetc(account: string, ethWei: bigint): Promise<void> {
+  if (ethWei <= 0n) throw new Error('Enter a test ETH amount.')
+  const out = petcForEth(ethWei)
+  const stock = await readShopStock()
+  if (stock < out) throw new Error('The shop does not have that much PETC left.')
+  await send(account, SHOP, BUY_PETC, ethWei)
+}
+
 export function notifyPetc(): void {
   window.dispatchEvent(new Event('petfight-petc'))
 }
@@ -109,13 +128,15 @@ async function switchToTestnet(ethereum: EthereumProvider): Promise<void> {
   }
 }
 
-async function send(from: string, to: string, data: string): Promise<void> {
+async function send(from: string, to: string, data: string, value?: bigint): Promise<void> {
   const ethereum = getEthereum()
   if (!ethereum) throw new Error('MetaMask is not installed in this browser.')
   await switchToTestnet(ethereum)
+  const tx: { from: string; to: string; data: string; value?: string } = { from, to, data }
+  if (value !== undefined && value > 0n) tx.value = `0x${value.toString(16)}`
   let hash: unknown
   try {
-    hash = await ethereum.request({ method: 'eth_sendTransaction', params: [{ from, to, data }] })
+    hash = await ethereum.request({ method: 'eth_sendTransaction', params: [tx] })
   } catch (error) {
     if (errorCode(error) === 4001) throw new Error('The wallet request was cancelled.')
     throw error

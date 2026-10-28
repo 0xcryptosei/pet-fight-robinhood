@@ -561,6 +561,23 @@ footer {
 .stake-grid p { margin: 0 0 12px; }
 .stake-grid form { display: flex; flex-direction: column; }
 .stake-grid button { margin-top: auto; }
+.shop-buy { grid-template-columns: minmax(0, 420px); }
+.shop-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.shop-amounts { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.shop-amounts button {
+  margin-top: 0;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid #24345f;
+  background: #0a1230;
+  color: #d5def5;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.shop-amounts button.is-on { border-color: #2f6bff; color: #fff; background: #16224a; }
 
 .room-backdrop { z-index: 18; overflow: hidden; padding: 12px; }
 .room-dialog {
@@ -860,7 +877,7 @@ footer {
   .lobby { grid-template-columns: 1fr; }
   .lobby-side { flex-direction: row; overflow: auto; border-right: 0; border-bottom: 1px solid #1e2c55; }
   .tier-row { grid-template-columns: 1fr 1fr; }
-  .stake-stats, .stake-grid, .pet-grid, .pet-profile, .pet-empty { grid-template-columns: 1fr; }
+  .stake-stats, .shop-stats, .stake-grid, .shop-buy, .pet-grid, .pet-profile, .pet-empty { grid-template-columns: 1fr; }
   .pet-items { grid-template-columns: 1fr 1fr; }
   .pet-statline, .pet-upgrade { flex-direction: column; align-items: stretch; }
   .pet-upgrade button { align-self: stretch; }

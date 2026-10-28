@@ -15,9 +15,7 @@ const nav = [
   { label: 'My pets', icon: 'pets', to: '/pets' },
   { label: 'Battle rooms', icon: 'battle', to: '/rooms' },
   { label: 'Practice', icon: 'practice', to: '/practice' },
-  { label: 'Marketplace', icon: 'market' },
-  { label: 'Inventory', icon: 'inventory' },
-  { label: 'Leaderboard', icon: 'board' },
+  { label: 'Shop', icon: 'shop', to: '/shop' },
 ]
 
 function navOn(to: string, path: string): boolean {
@@ -86,19 +84,12 @@ export function LobbyFrame({ children }: { children: ReactNode }) {
         <AccountButton appearance="pill" />
       </header>
       <aside className="lobby-side" aria-label="Lobby">
-        {nav.map((item) =>
-          item.to ? (
-            <Link key={item.label} className={navOn(item.to, location.pathname) ? 'is-on' : undefined} to={item.to}>
-              <NavIcon name={item.icon} />
-              {item.label}
-            </Link>
-          ) : (
-            <button key={item.label} type="button">
-              <NavIcon name={item.icon} />
-              {item.label}
-            </button>
-          ),
-        )}
+        {nav.map((item) => (
+        <Link key={item.label} className={navOn(item.to, location.pathname) ? 'is-on' : undefined} to={item.to}>
+          <NavIcon name={item.icon} />
+          {item.label}
+        </Link>
+      ))}
       </aside>
       {children}
     </div>
@@ -149,24 +140,9 @@ function NavIcon({ name }: { name: string }) {
       </svg>
     )
   }
-  if (name === 'market') {
-    return (
-      <svg {...common}>
-        <path d="M4 9h16l-1 11H5zM8 9V7a4 4 0 0 1 8 0v2" />
-      </svg>
-    )
-  }
-  if (name === 'inventory') {
-    return (
-      <svg {...common}>
-        <rect x="5" y="4" width="14" height="16" rx="2" />
-        <path d="M9 4v4h6V4" />
-      </svg>
-    )
-  }
   return (
     <svg {...common}>
-      <path d="M8 20h8M12 16v4M7 4h10v4a5 5 0 0 1-10 0z" />
+      <path d="M4 9h16l-1 11H5zM8 9V7a4 4 0 0 1 8 0v2" />
     </svg>
   )
 }

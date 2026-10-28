@@ -5,7 +5,7 @@ import { AccountButton } from './AccountButton'
 const links = [
   { to: '/#how', label: 'Pets' },
   { to: '/#how', label: 'Battle' },
-  { to: '/#how', label: 'Marketplace' },
+  { to: '/shop', label: 'Shop' },
   { to: '/#how', label: 'Wallet' },
 ]
 

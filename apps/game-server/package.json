@@ -1,0 +1,25 @@
+{
+  "name": "@pet-fight/game-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "start": "tsx src/main.ts"
+  },
+  "dependencies": {
+    "@fastify/websocket": "^8.3.1",
+    "@pet-fight/game-engine": "file:../../packages/game-engine",
+    "fastify": "^4.28.1",
+    "viem": "^2.21.54"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.50",
+    "@types/ws": "^8.5.12",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.9",
+    "ws": "^8.18.0"
+  }
+}

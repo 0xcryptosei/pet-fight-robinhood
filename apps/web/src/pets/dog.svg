@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Dog">
+  <circle cx="50" cy="50" r="48" fill="#1B2A55"/>
+  <circle cx="50" cy="50" r="46.5" fill="none" stroke="#FFC53D" stroke-width="3"/>
+  <ellipse cx="27" cy="44" rx="10" ry="19" fill="#8B5A2B" transform="rotate(18 27 44)"/>
+  <ellipse cx="73" cy="44" rx="10" ry="19" fill="#8B5A2B" transform="rotate(-18 73 44)"/>
+  <circle cx="50" cy="53" r="26" fill="#E3A35B"/>
+  <ellipse cx="50" cy="65" rx="14" ry="10" fill="#F6DDB8"/>
+  <circle cx="40" cy="49" r="3.6" fill="#141428"/>
+  <circle cx="60" cy="49" r="3.6" fill="#141428"/>
+  <circle cx="41.2" cy="47.8" r="1.2" fill="#fff"/>
+  <circle cx="61.2" cy="47.8" r="1.2" fill="#fff"/>
+  <ellipse cx="50" cy="60" rx="5" ry="3.6" fill="#141428"/>
+  <path d="M44 67 Q50 72 56 67" fill="none" stroke="#141428" stroke-width="2" stroke-linecap="round"/>
+</svg>

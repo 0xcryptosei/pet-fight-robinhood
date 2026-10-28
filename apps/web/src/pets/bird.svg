@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Bird">
+  <circle cx="50" cy="50" r="48" fill="#1B2A55"/>
+  <circle cx="50" cy="50" r="46.5" fill="none" stroke="#6EE7B7" stroke-width="3"/>
+  <polygon points="45,30 50,13 55,30" fill="#059669"/>
+  <polygon points="39,32 37,19 47,29" fill="#059669"/>
+  <polygon points="53,29 63,19 61,32" fill="#059669"/>
+  <circle cx="50" cy="55" r="26" fill="#34D399"/>
+  <ellipse cx="50" cy="67" rx="15" ry="10" fill="#D1FAE5"/>
+  <circle cx="41" cy="49" r="3.6" fill="#141428"/>
+  <circle cx="59" cy="49" r="3.6" fill="#141428"/>
+  <circle cx="42.2" cy="47.8" r="1.2" fill="#fff"/>
+  <circle cx="60.2" cy="47.8" r="1.2" fill="#fff"/>
+  <polygon points="44,56 56,56 50,64" fill="#F59E0B"/>
+</svg>

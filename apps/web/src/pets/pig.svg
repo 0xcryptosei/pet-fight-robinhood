@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Pig">
+  <circle cx="50" cy="50" r="48" fill="#1B2A55"/>
+  <circle cx="50" cy="50" r="46.5" fill="none" stroke="#F9A8D4" stroke-width="3"/>
+  <polygon points="29,38 25,19 43,30" fill="#F06EA9"/>
+  <polygon points="71,38 75,19 57,30" fill="#F06EA9"/>
+  <circle cx="50" cy="55" r="27" fill="#F9B4D0"/>
+  <circle cx="39" cy="48" r="3.4" fill="#141428"/>
+  <circle cx="61" cy="48" r="3.4" fill="#141428"/>
+  <circle cx="40.1" cy="46.9" r="1.1" fill="#fff"/>
+  <circle cx="62.1" cy="46.9" r="1.1" fill="#fff"/>
+  <ellipse cx="50" cy="62" rx="12" ry="8.5" fill="#F472B6"/>
+  <ellipse cx="46" cy="62" rx="2.2" ry="3.2" fill="#9D174D"/>
+  <ellipse cx="54" cy="62" rx="2.2" ry="3.2" fill="#9D174D"/>
+  <path d="M44 73 Q50 76 56 73" fill="none" stroke="#9D174D" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

@@ -3,6 +3,7 @@ import { ConnectDialog } from './components/ConnectDialog'
 import { Layout } from './components/Layout'
 import { Docs } from './pages/Docs'
 import { Home } from './pages/Home'
+import { Battle } from './pages/Battle'
 import { BattleRooms } from './pages/BattleRooms'
 import { Lobby } from './pages/Lobby'
 import { Pets } from './pages/Pets'
@@ -26,6 +27,7 @@ export function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/rooms" element={<BattleRooms />} />
           <Route path="/rooms/:roomId" element={<WaitingRoom />} />
+          <Route path="/battle/:roomId" element={<Battle />} />
         </Routes>
         <ConnectDialog />
       </WalletProvider>

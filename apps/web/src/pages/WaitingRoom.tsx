@@ -49,13 +49,19 @@ export function WaitingRoom() {
 
   useEffect(() => {
     void load()
-    const poll = window.setInterval(() => void load(), 4000)
+    const poll = window.setInterval(() => void load(), 1000)
     const clock = window.setInterval(() => setNow(Date.now()), 1000)
     return () => {
       window.clearInterval(poll)
       window.clearInterval(clock)
     }
   }, [load])
+
+  useEffect(() => {
+    if (!room?.guest) return
+    if (room.status !== 'READY' && room.status !== 'IN_PROGRESS') return
+    navigate(`/battle/${room.id}`, { replace: true })
+  }, [navigate, room])
 
   const fighter = fighterById(roomId ? rememberedFighter(roomId) : 'dog')
   const mine = Boolean(room && wallet.address === room.host)
@@ -83,7 +89,7 @@ export function WaitingRoom() {
         method: 'POST',
         body: JSON.stringify(code ? { inviteCode: code } : {}),
       })
-      await load()
+      navigate(`/battle/${room.id}`, { replace: true })
     } catch (caught) {
       setNotice(caught instanceof Error ? caught.message : 'Could not join the room.')
     } finally {
@@ -157,7 +163,7 @@ export function WaitingRoom() {
                 Opponent joins and locks {tier.toLocaleString('en-US')} PETC
                 {joined ? null : <em>Room expires in {remain(room.joinDeadline, now)} if nobody joins</em>}
               </li>
-              <li>Both players ready · pot {formatPetc(room.pot)} PETC</li>
+              <li className={joined ? 'is-now' : undefined}>Battle starts 3 seconds after the opponent joins · pot {formatPetc(room.pot)} PETC</li>
             </ol>
 
             <label className="wait-invite">

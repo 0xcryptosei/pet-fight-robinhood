@@ -862,6 +862,91 @@ footer {
 .wait-invite input { flex: 1; min-width: 0; min-height: 44px; padding: 0 12px; border-radius: 12px; border: 1px solid #24345f; background: #0a1230; color: #fff; }
 .wait-invite button { border: 1px solid #33467f; background: #16224a; color: #fff; padding: 0 14px; }
 
+.fight {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  background: #8fd0f5 url('/battle-bg.jpg') center / 100% 100% no-repeat;
+  color: #fff;
+}
+.fight-hud {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  padding: 10px 18px;
+  background: linear-gradient(#6a4324, #3d2412);
+  border-bottom: 4px solid #2a180c;
+}
+.fight-side { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.fight-side.is-dog { justify-content: flex-end; }
+.fight-side > img, .fight-vs img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f3d7a1;
+  background: #1a274f;
+}
+.fight-side span { display: block; margin-bottom: 4px; color: #ffe7bf; font-size: 13px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+.fight-side div { flex: 1; min-width: 0; }
+.fight-side i { display: block; height: 18px; border-radius: 999px; background: #1a120c; border: 2px solid #2a180c; overflow: hidden; }
+.fight-side b { display: block; height: 100%; }
+.fight-side.is-cat b { background: linear-gradient(#7ecbff, #1d7dff); }
+.fight-side.is-dog b { margin-left: auto; background: linear-gradient(#ffe08a, #f0a202); }
+.fight-vs { display: flex; align-items: center; gap: 8px; position: relative; }
+.fight-vs strong { color: #ffe7bf; font-family: "Baloo 2", Inter, sans-serif; font-size: 28px; line-height: 1; }
+.fight-vs em { position: absolute; left: 50%; top: 52px; transform: translateX(-50%); color: #fff4dc; font-style: normal; font-size: 13px; font-weight: 800; }
+.fight-mid { position: absolute; left: 50%; top: 92px; z-index: 2; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; width: min(440px, 70vw); }
+.fight-wind { margin: 0; min-width: 132px; padding: 6px 16px; border-radius: 999px; background: #16324f; border: 2px solid #d7ecff; color: #fff; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; text-align: center; }
+.fight-wind.is-left::before, .fight-wind.is-right::after { content: ""; display: inline-block; margin: 0 6px; border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+.fight-wind.is-left::before { border-right: 10px solid #7dd3fc; }
+.fight-wind.is-right::after { border-left: 10px solid #7dd3fc; }
+.fight-meter, .fight-angle { position: relative; width: 100%; color: #fff8e8; font-size: 12px; font-weight: 800; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); }
+.fight-meter { height: 28px; border-radius: 999px; background: #1a120c; border: 3px solid #2a180c; overflow: hidden; }
+.fight-meter span { position: absolute; left: 12px; top: 5px; z-index: 1; }
+.fight-meter i { position: absolute; left: 3px; top: 3px; bottom: 3px; border-radius: 999px; background: linear-gradient(90deg, #3ddc97, #ffe08a); }
+.fight-meter, .fight-angle input { width: 100%; }
+.fight-meter input, .fight-angle input { position: absolute; left: 0; right: 0; accent-color: #ffc53d; }
+.fight-meter input { top: 0; height: 28px; opacity: 0.01; cursor: pointer; }
+.fight.is-aiming { cursor: crosshair; }
+.fight-hint { margin: 0; color: #fff8e8; font-size: 12px; font-weight: 800; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55); }
+.fight-aim { position: absolute; bottom: 10%; width: 180px; height: 170px; pointer-events: none; z-index: 2; overflow: visible; }
+.fight-aim.is-left { left: 6%; }
+.fight-aim.is-right { right: 6%; }
+.fight-angle { display: flex; flex-direction: column; gap: 2px; }
+.fight-angle input { position: static; height: 18px; }
+.fight-clock { margin: 0; color: #fff; font-weight: 800; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55); }
+.fight-field { position: relative; flex: 1; min-height: 0; }
+.fight-pet { position: absolute; bottom: 8%; width: 180px; text-align: center; }
+.fight-pet.is-left { left: 7%; }
+.fight-pet.is-right { right: 7%; }
+.fight-pet > img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; background: #1a274f; box-shadow: 0 10px 18px rgba(0, 0, 0, 0.28); }
+.fight-pet.is-active > img { border-color: #ffc53d; }
+.fight-pet span { display: block; margin-top: 6px; color: #fff; font-size: 14px; font-weight: 800; text-shadow: 0 2px 2px rgba(0, 0, 0, 0.45); }
+.fight-loadout { position: absolute; top: 18%; display: flex; gap: 8px; z-index: 2; }
+.fight-loadout.is-cat { left: 24px; }
+.fight-loadout.is-dog { right: 24px; }
+.fight-loadout button { width: 64px; height: 64px; padding: 6px; border-radius: 50%; border: 3px solid #f3d7a1; background: rgba(18, 28, 62, 0.88); cursor: pointer; }
+.fight-loadout button:disabled { opacity: 0.45; cursor: default; }
+.fight-loadout img { width: 100%; height: 34px; object-fit: contain; }
+.fight-loadout span { display: block; color: #ffe7bf; font-size: 9px; font-weight: 800; }
+.fight-turn { position: absolute; margin: 0; font-family: "Baloo 2", Inter, sans-serif; font-size: 28px; color: #fff4dc; text-shadow: 0 2px 0 #6a3b12, 0 0 8px rgba(0, 0, 0, 0.35); }
+.fight-turn.is-cat { left: 8%; bottom: 34%; }
+.fight-turn.is-dog { right: 8%; bottom: 34%; }
+.fight-extra { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; gap: 8px; }
+.fight-extra button, .fight-cover button { min-height: 36px; padding: 0 14px; border: 0; border-radius: 999px; background: #2f6bff; color: #fff; font: inherit; font-weight: 800; cursor: pointer; }
+.fight-extra button:disabled { opacity: 0.45; cursor: default; }
+.fight-projectile { position: absolute; width: 58px; height: 58px; margin-left: -29px; margin-bottom: -29px; pointer-events: none; z-index: 3; filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.35)); }
+.fight-shot { position: absolute; left: 50%; top: 46%; transform: translateX(-50%); margin: 0; padding: 8px 14px; border-radius: 999px; background: rgba(22, 14, 8, 0.82); color: #ffd66b; font-weight: 800; }
+.fight-cover { position: absolute; inset: 0; z-index: 4; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: rgba(7, 16, 40, 0.55); }
+.fight-cover p { margin: 0; color: #fff; font-size: 18px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; }
+.fight-cover strong { font-family: "Baloo 2", Inter, sans-serif; font-size: 92px; line-height: 1; }
+.fight-cover button { min-width: 180px; font-family: "Baloo 2", Inter, sans-serif; font-size: 20px; }
+.fight-notice { position: absolute; left: 50%; bottom: 64px; z-index: 4; transform: translateX(-50%); margin: 0; color: #ffd66b; font-weight: 700; }
+
 @media (max-width: 980px) {
   .copy h1 { font-size: 48px; }
   .features { grid-template-columns: 1fr 1fr; }
@@ -887,4 +972,10 @@ footer {
   .room-row, .battle-row { grid-template-columns: 1fr auto; }
   .room-tiers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .wait-vs { grid-template-columns: 1fr; }
+  .fight-hud { grid-template-columns: 1fr; gap: 8px; }
+  .fight-vs { justify-content: center; }
+  .fight-pet { width: 110px; }
+  .fight-pet > img { width: 88px; height: 88px; }
+  .fight-loadout button { width: 48px; height: 48px; }
+  .fight-cover strong { font-size: 72px; }
 }
